@@ -1,11 +1,6 @@
 DirectoryIndex index.html
 Options -Indexes
 ErrorDocument 404 /404.html
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteRule ^creators/(ana-kovac|ema-kovac|mila-hart)(/|$) - [G,L,NC]
-  RewriteRule ^images/creator-115(/|$) - [G,L,NC]
-</IfModule>
 <IfModule mod_headers.c>
   SetEnvIf Host "^ugc\.gordon\.ba(:[0-9]+)?$" ugc_temporary_host
   Header set X-Robots-Tag "noindex, follow" env=ugc_temporary_host
