@@ -39,7 +39,7 @@ const confirmedLanguages:Record<string,{languages:string[];languageNote?:string}
  'creator-7':{languages:['English','German (very good)']},
  'creator-101':{languages:['English (C1)','Italian (C2)','Spanish (B2)']},
  'creator-102':{languages:['English','Bosnian'],languageNote:'German script rehearsal available on request; German proficiency has not been confirmed.'},
- 'creator-103':{languages:['Turkish (B1)']},
+ 'creator-103':{languages:['English','Turkish (B1)']},
  'creator-104':{languages:['English']},
  'creator-110':{languages:['English','German (basic)']},
  'creator-111':{languages:['English (fluent)']},
@@ -59,5 +59,9 @@ const featuredIndex=profiles.findIndex(profile=>profile.id==='creator-202');
 if(featuredIndex>0)profiles.unshift(...profiles.splice(featuredIndex,1));
 const annaIndex=profiles.findIndex(profile=>profile.id==='creator-101');
 if(annaIndex>=0)profiles.push(...profiles.splice(annaIndex,1));
+const contentFocus:Record<string,string[]>={
+ 'creator-1':['Lifestyle','Beauty','SaaS'],'creator-3':['Fitness','Sport'],'creator-5':['SaaS','Beauty'],'creator-7':['Sport','Lifestyle','Fashion'],'creator-9':['Fashion','Beauty'],'creator-101':['Lifestyle','SaaS','Fashion'],'creator-102':['Fashion','Lifestyle'],'creator-103':['Beauty','Fashion','SaaS'],'creator-104':['Beauty','Lifestyle'],'creator-105':['Fitness','Lifestyle','Sport'],'creator-106':['Fashion','Beauty','Lifestyle'],'creator-107':['Beauty','SaaS'],'creator-108':['Lifestyle','Fashion'],'creator-109':['Fashion','Beauty','SaaS'],'creator-110':['Beauty','Lifestyle'],'creator-111':['Lifestyle','Fashion','SaaS'],'creator-112':['SaaS','Lifestyle'],'creator-113':['Beauty','Lifestyle','Fashion'],'creator-114':['Fashion','Sport'],'creator-115':['Sport','Lifestyle'],'creator-201':['Lifestyle','Beauty'],'creator-202':['Fashion','Beauty','Lifestyle']
+};
+for(const profile of profiles)profile.focus=contentFocus[profile.id]??[profile.category];
 export function profileLabel(profile:Profile){return `${profile.name}${typeof profile.age==='number'?`, ${profile.age}`:''}`;}
 export const categories=['Lifestyle','Beauty','Fitness','Fashion','SaaS','Sport'];

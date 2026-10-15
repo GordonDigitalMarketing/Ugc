@@ -1,0 +1,4 @@
+IP Geolocation by DB-IP: https://db-ip.com
+DB-IP Country Lite October 2026. Derived from the free CSV database.
+Licensed under Creative Commons Attribution 4.0: https://creativecommons.org/licenses/by/4.0/
+Binary format: network-order start IP, end IP, two-letter country code.

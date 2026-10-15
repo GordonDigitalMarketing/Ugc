@@ -20,8 +20,7 @@ if (!is_array($data)) respond(400,['ok'=>false,'error'=>'Invalid form data.']);
 if (!empty($data['companyFax'])) respond(400,['ok'=>false,'error'=>'Unable to submit this form.']);
 function field(array $data,string $key,int $max=500): string { $value=$data[$key]??''; if(!is_string($value)) respond(422,['ok'=>false,'error'=>'Invalid form field.']); $value=trim($value); if(strlen($value)>$max) respond(422,['ok'=>false,'error'=>'A form field is too long.']); return $value; }
 $name=field($data,'name',100); $email=field($data,'email',200); $brand=field($data,'brand',150); $description=field($data,'description',5000); $service=field($data,'service',100);
-if (!$name || !$brand || !$service || strlen($description)<15 || !filter_var($email,FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n]/',$email)) respond(422,['ok'=>false,'error'=>'Please complete your name, email, brand, service and project details.']);
-if (($data['privacy']??'')!=='on') respond(422,['ok'=>false,'error'=>'Please read and acknowledge the privacy policy.']);
+if (!$name || !filter_var($email,FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n]/',$email)) respond(422,['ok'=>false,'error'=>'Please enter your name and a valid email address.']);
 $website=field($data,'website',300); if($website!=='' && !filter_var($website,FILTER_VALIDATE_URL)) respond(422,['ok'=>false,'error'=>'Please enter a valid website URL.']);
 // Rate-limit outside the public web directory. Message contents are not saved here.
 $storage=dirname(__DIR__).'/.ugc-contact';
@@ -35,7 +34,7 @@ if(count($attempts)>=5){flock($handle,LOCK_UN);fclose($handle);respond(429,['ok'
 $attempts[]=$now; rewind($handle); ftruncate($handle,0); fwrite($handle,json_encode($attempts)); fflush($handle); flock($handle,LOCK_UN); fclose($handle);
 foreach(glob($storage.'/*.json')?:[] as $file){if(filemtime($file)<$now-86400)@unlink($file);}
 $selection=[]; if(isset($data['creators']) && is_array($data['creators'])) foreach(array_slice($data['creators'],0,30) as $person){if(is_array($person)&&isset($person['name'])&&is_string($person['name']))$selection[]=substr(str_replace(["\r","\n"],' ',$person['name']),0,100);}
-$lines=['New UGC.ba Studio enquiry','Name: '.$name,'Email: '.$email,'Brand: '.$brand,'Website: '.$website,'Service: '.$service,'Creators: '.($selection?implode(', ',$selection):'Please suggest a match')];
+$lines=['New UGC.ba Studio enquiry','Name: '.$name,'Email: '.$email,'Brand: '.$brand,'Website: '.$website,'Service: '.($service?:'General enquiry'),'Creators: '.($selection?implode(', ',$selection):'Please suggest a match')];
 foreach(['budget','deadline','language'] as $key)$lines[]=ucfirst($key).': '.field($data,$key,200);
 $campaign=$data['campaign']??null;
 if($campaign!==null){
@@ -45,7 +44,7 @@ if($campaign!==null){
  if($sum!==$campaign['videos'])respond(422,['ok'=>false,'error'=>'The creator split must add up to your selected package.']);
  $lines[]='PACKAGE: '.$campaign['videos'].' fully edited, ready-to-publish videos';$lines[]='Usage: '.$campaign['usage'];$lines[]='Creator mix: '.implode('; ',$splits);$lines[]='Pricing: one combined quote for this entire package; no payment or booking created.';
 }else{foreach(['videos','usage'] as $key)$lines[]=ucfirst($key).': '.field($data,$key,200);}
-$lines[]="\nProject:\n".$description; $lines[]="\nPrivacy notice acknowledged. Submitted: ".gmdate('c');
+$lines[]="\nProject:\n".$description; $lines[]="\nSubmitted: ".gmdate('c');
 $host=strtolower(explode(':',$_SERVER['HTTP_HOST']??'ugc.ba')[0]);
 $sender=$host==='ugc.gordon.ba'?'info@gordondm.com':'info@ugc.ba';
 $headers=['From'=>'UGC.ba Studio <'.$sender.'>','Reply-To'=>$email,'MIME-Version'=>'1.0','Content-Type'=>'text/plain; charset=UTF-8'];
