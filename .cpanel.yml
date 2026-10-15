@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - /usr/bin/rsync -ac --delay-updates --chmod=D755,F644 --exclude=.git --exclude=.cpanel.yml ./ /home/ugc/public_html/
+    - /bin/sh -c 'case "$(/usr/bin/id -un)" in ugc) target=/home/ugc/public_html/ ;; gordondm) target=/home/gordondm/ugc.gordon.ba/ ;; *) exit 1 ;; esac; /usr/bin/rsync -ac --delay-updates --chmod=D755,F644 --exclude=.git --exclude=.cpanel.yml ./ "$target"'
