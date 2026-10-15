@@ -226,5 +226,28 @@
       "/images/creator-115/03.webp",
       "/images/creator-115/04.webp"
     ]
+  },
+  "creator-201": {
+    "image": "/images/creator-201/portrait.webp",
+    "gallery": [
+      "/images/creator-201/01.webp",
+      "/images/creator-201/02.webp",
+      "/images/creator-201/03.webp",
+      "/images/creator-201/04.webp",
+      "/images/creator-201/05.webp"
+    ]
+  },
+  "creator-202": {
+    "image": "/images/creator-202/portrait.webp",
+    "gallery": [
+      "/images/creator-202/01.webp",
+      "/images/creator-202/02.webp",
+      "/images/creator-202/03.webp",
+      "/images/creator-202/04.webp",
+      "/images/creator-202/05.webp",
+      "/images/creator-202/06.webp",
+      "/images/creator-202/07.webp",
+      "/images/creator-202/08.webp"
+    ]
   }
 }
