@@ -25,7 +25,7 @@
   let action=(el.getAttribute('aria-label')||el.textContent||'Click').replace(/\s+/g,' ').trim().slice(0,80);
   if(el.classList.contains('image-button')||el.classList.contains('portfolio-link')||el.classList.contains('hero-profile'))action='Otvori profil';
   else if(el.closest('.gallery-grid')||el.closest('.creator-photo-grid'))action='Otvori fotografiju';
-  else if(el.type==='submit')action='Pošalji upit';
+  else if(el instanceof HTMLButtonElement&&el.type==='submit'&&el.form)action='Pošalji upit';
   const photo=action==='Otvori fotografiju'?pathOnly(el.getAttribute('data-photo-path')||el.querySelector('img')?.getAttribute('src')||''):currentPhoto;
   send('click',{creator,action,photo,target:pathOnly(el.getAttribute('href')||page)});
  },true);
