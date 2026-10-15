@@ -34,9 +34,17 @@ $attempts=array_values(array_filter($attempts,fn($t)=>is_int($t)&&$t>$now-3600))
 if(count($attempts)>=5){flock($handle,LOCK_UN);fclose($handle);respond(429,['ok'=>false,'error'=>'Too many enquiries. Please try again in an hour or email us.']);}
 $attempts[]=$now; rewind($handle); ftruncate($handle,0); fwrite($handle,json_encode($attempts)); fflush($handle); flock($handle,LOCK_UN); fclose($handle);
 foreach(glob($storage.'/*.json')?:[] as $file){if(filemtime($file)<$now-86400)@unlink($file);}
-$selection=[]; if(isset($data['shortlist']) && is_array($data['shortlist'])) foreach(array_slice($data['shortlist'],0,30) as $person){if(is_array($person)&&isset($person['name'])&&is_string($person['name']))$selection[]=substr(str_replace(["\r","\n"],' ',$person['name']),0,100);}
+$selection=[]; if(isset($data['creators']) && is_array($data['creators'])) foreach(array_slice($data['creators'],0,30) as $person){if(is_array($person)&&isset($person['name'])&&is_string($person['name']))$selection[]=substr(str_replace(["\r","\n"],' ',$person['name']),0,100);}
 $lines=['New UGC.ba Studio enquiry','Name: '.$name,'Email: '.$email,'Brand: '.$brand,'Website: '.$website,'Service: '.$service,'Creators: '.($selection?implode(', ',$selection):'Please suggest a match')];
-foreach(['budget','videos','deadline','language','usage'] as $key)$lines[]=ucfirst($key).': '.field($data,$key,200);
+foreach(['budget','deadline','language'] as $key)$lines[]=ucfirst($key).': '.field($data,$key,200);
+$campaign=$data['campaign']??null;
+if($campaign!==null){
+ if(!is_array($campaign)||!in_array($campaign['videos']??null,[10,20,30],true)||!in_array($campaign['usage']??null,['organic','paid','whitelisting'],true)||!isset($campaign['allocations'])||!is_array($campaign['allocations'])||count($campaign['allocations'])<1||count($campaign['allocations'])>20)respond(422,['ok'=>false,'error'=>'Please choose a valid video package and creator mix.']);
+ $sum=0;$ids=[];$splits=[];
+ foreach($campaign['allocations'] as $part){if(!is_array($part)||!isset($part['id'],$part['name'],$part['videos'])||!is_string($part['id'])||!is_string($part['name'])||strlen($part['name'])>100||!is_int($part['videos'])||$part['videos']<1||$part['videos']>30||in_array($part['id'],$ids,true))respond(422,['ok'=>false,'error'=>'Please check the video allocation for each creator.']);$sum+=$part['videos'];$ids[]=$part['id'];$splits[]=str_replace(["\r","\n"],' ',$part['name']).': '.$part['videos'].' videos';}
+ if($sum!==$campaign['videos'])respond(422,['ok'=>false,'error'=>'The creator split must add up to your selected package.']);
+ $lines[]='PACKAGE: '.$campaign['videos'].' fully edited, ready-to-publish videos';$lines[]='Usage: '.$campaign['usage'];$lines[]='Creator mix: '.implode('; ',$splits);$lines[]='Pricing: one combined quote for this entire package; no payment or booking created.';
+}else{foreach(['videos','usage'] as $key)$lines[]=ucfirst($key).': '.field($data,$key,200);}
 $lines[]="\nProject:\n".$description; $lines[]="\nPrivacy notice acknowledged. Submitted: ".gmdate('c');
 $host=strtolower(explode(':',$_SERVER['HTTP_HOST']??'ugc.ba')[0]);
 $sender=$host==='ugc.gordon.ba'?'info@gordondm.com':'info@ugc.ba';
