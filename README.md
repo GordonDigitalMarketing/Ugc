@@ -11,6 +11,19 @@ npm run dev
 
 Open http://127.0.0.1:3000. Production verification: `npm run build`. Type checking: `npm run typecheck`.
 
+## Publish GitHub + live
+
+```sh
+npm run publish -- "Describe the change"
+npm run status
+```
+
+The publish command verifies the build, commits project files and pushes `main` to https://github.com/GordonDigitalMarketing/Ugc. GitHub Actions builds the static Next.js export and publishes it to the `live` branch. The existing ugc.ba cPanel account clones that branch at `/home/ugc/repositories/ugc-live`. A configured cron checks it every minute and copies built files into `/home/ugc/public_html` using rsync with delayed updates. No hosting passwords or tokens are stored in GitHub or source files. The CLI uses the existing local Git Credential Manager login.
+
+The cPanel **Git Version Control → ugc.ba live → Pull or Deploy** screen also supports manual update and deployment through `.cpanel.yml`. Never edit the hosting clone manually; edit source on `main` instead. No DNS or nameserver changes are part of this workflow. DNS activation and a valid TLS certificate are required before the domain can be verified publicly. `/version.json` identifies the deployed source commit. GitHub build status: https://github.com/GordonDigitalMarketing/Ugc/actions.
+
+The first deployment is published on the existing hosting. Publication does not enable email delivery or administration; the inquiry form remains clearly marked as a demo.
+
 ## Current functionality
 
 - 30 illustrative adult creator profiles and 6 editor profiles.
@@ -27,6 +40,6 @@ Current external images are illustrative stock portraits from Unsplash, repeated
 
 ## Next phase
 
-This is a local working prototype, not a deployed marketplace. There is no database, administration interface, real inquiry delivery, sign-in or payment integration yet. Those require a hosting and data-storage choice. Add a protected content-management interface and durable image storage when self-service editing is needed. The public app currently needs no secrets.
+This is a deployed demonstration directory, not a marketplace. There is no database, administration interface, real inquiry delivery, sign-in or payment integration yet. Add a protected content-management interface and durable image storage when self-service editing is needed. The public app currently needs no secrets. Static export supports the present browser-based functionality; future server endpoints will require a different hosting configuration.
 
 English is the initial interface language. Creator spoken languages are separate structured fields; Bosnian/German interface translations and SEO landing pages remain future work. All rights, package terms and availability currently displayed are demo proposals, not live contractual offers.

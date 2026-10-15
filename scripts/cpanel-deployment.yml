@@ -1,8 +1,4 @@
 ---
 deployment:
   tasks:
-    - /bin/mkdir -p /home/ugc/public_html/_next
-    - /bin/cp -a _next/. /home/ugc/public_html/_next/
-    - /bin/cp -a 404.html .htaccess /home/ugc/public_html/
-    - /bin/cp -a index.html /home/ugc/public_html/
-    - /bin/cp -a version.json /home/ugc/public_html/
+    - /usr/bin/rsync -a --delay-updates --exclude=.git --exclude=.cpanel.yml ./ /home/ugc/public_html/
