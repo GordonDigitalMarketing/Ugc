@@ -52,6 +52,8 @@ profiles.push(
  {id:'creator-202',slug:'mia',name:'Mia',role:'Creator',category:'Fashion',focus:['SaaS','Fashion','Beauty'],languages:['English'],age:24,ageEstimated:true,...media['creator-202']}
 );
 // Keep existing portfolio URLs working while displaying only first names everywhere.
-for(const profile of profiles){profile.name=profile.name.trim().split(/\s+/)[0];}
+for(const profile of profiles){profile.name=profile.name.trim().split(/\s+/)[0];profile.languages=profile.languages.map(language=>language.replace(/\s*\([^)]*\)/g,''));}
+// A known underage creator must not be presented as an adult booking profile.
+for(let index=profiles.length-1;index>=0;index--){if(typeof profiles[index].age==='number'&&profiles[index].age!<18)profiles.splice(index,1);}
 export function profileLabel(profile:Profile){return `${profile.name}${typeof profile.age==='number'?`, ${profile.age}`:''}`;}
 export const categories=['Lifestyle','Beauty','Fitness','Fashion','SaaS','Sport'];
