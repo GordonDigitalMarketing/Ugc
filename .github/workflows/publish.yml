@@ -1,0 +1,45 @@
+name: Build ugc.ba
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ugc-ba-production
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Prepare deployment metadata
+        run: |
+          node -e 'require("fs").writeFileSync("out/version.json",JSON.stringify({commit:process.env.GITHUB_SHA,builtAt:new Date().toISOString()}))'
+          cp scripts/cpanel-deployment.yml out/.cpanel.yml
+      - name: Publish built files to live branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin live; then
+            git fetch origin live
+            git worktree add deployment origin/live
+          else
+            mkdir deployment
+            git -C deployment init -b live
+            git -C deployment remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          fi
+          rsync -a --delete --exclude='.git' out/ deployment/
+          cd deployment
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Deploy ${GITHUB_SHA}"
+          git -c http.extraheader="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)" push origin HEAD:live
