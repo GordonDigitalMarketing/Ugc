@@ -13,4 +13,5 @@ else if (changed.status !== 0) process.exit(1);
 run('git', ['-c', 'credential.username=GordonDigitalMarketing', 'push', '-u', 'origin', 'main']);
 console.log('Source pushed. GitHub Actions builds the live branch; hosting checks it every minute.');
 console.log('Build status: https://github.com/GordonDigitalMarketing/Ugc/actions');
-console.log('Live website: https://ugc.ba');
+console.log('Live website: https://ugc.gordon.ba');
+console.log('Original domain: https://ugc.ba');

@@ -38,3 +38,15 @@ npm run build
 npm run typecheck
 
 GitHub Actions also runs php -l public/contact.php. Browser checks cover profile filtering, actual-image galleries, shortlist selection/removal and handoff to the enquiry form, responsive navigation and policy links.
+
+## Temporary live mirror: ugc.gordon.ba
+
+An isolated mirror is configured on the existing gordondm cPanel account:
+- Document root: /home/gordondm/ugc.gordon.ba (separate from /home/gordondm/gordon.ba and public_html).
+- Git clone: /home/gordondm/repositories/ugc-gordon-live, checked out to live.
+- A dedicated cron pulls the live branch and copies only into /home/gordondm/ugc.gordon.ba every minute. Existing cron jobs are untouched.
+- The shared .cpanel.yml selects only the fixed UGC destination for each known account. It does not write to gordon.ba or any other website.
+- HTTPS is valid on the mirror. Both enquiry recipients remain info@gordondm.com and info@ugc.ba. The mirror sends using the existing info@gordondm.com domain, and local preview submits to the mirror.
+- Canonicals remain on ugc.ba; the temporary host sends X-Robots-Tag: noindex, follow to avoid duplicate indexing.
+
+Future requests to publish GitHub + live should verify both mirrors' version.json. Never edit other WHM accounts, the gordon.ba document root, existing redirects or unrelated DNS records as part of UGC publication.
