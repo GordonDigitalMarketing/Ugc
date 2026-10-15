@@ -20,6 +20,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Check contact form endpoint
         run: find public -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Check visitor grouping, returns and photo attribution
+        run: php scripts/check-analytics.php
       - run: npm run build
       - name: Prepare deployment metadata
         run: |

@@ -29,4 +29,12 @@ function ugc_safe($value,int $limit=160): string {return is_string($value)?subst
 function ugc_path($value): string {$path=ugc_safe($value,250);return preg_match('~^/[a-zA-Z0-9/_\.\-]*$~',$path)?$path:'/';}
 function ugc_internal(string $host): bool {return in_array(strtolower($host),['ugc.ba','www.ugc.ba','ugc.gordon.ba','localhost','127.0.0.1'],true);}
 function ugc_names(): array {$file=__DIR__.'/analytics-geo/creators.json';$a=json_decode((string)@file_get_contents($file),true);return is_array($a)?$a:[];}
+function ugc_visitor_id(string $ip,string $device,string $os,string $browser,string $key): string {
+ $packed=@inet_pton($ip);if($packed!==false)$ip=inet_ntop($packed);
+ return substr(hash_hmac('sha256',json_encode([$ip,$device,$os,$browser]),$key),0,24);
+}
+function ugc_media(): array {static $media=null;if($media===null)$media=json_decode((string)@file_get_contents(__DIR__.'/analytics-geo/media.json'),true)?:[];return $media;}
+function ugc_photo($value,string $creator): string {
+ $photo=ugc_safe($value,150);$media=ugc_media();return isset($media[$creator])&&in_array($photo,$media[$creator]['gallery']??[],true)?$photo:'';
+}
 function ugc_json(int $code,array $data=[]): void {http_response_code($code);if($code!==204)echo json_encode($data,JSON_UNESCAPED_UNICODE);exit;}
