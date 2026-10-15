@@ -10,4 +10,5 @@ for (const profile of profiles) {
   const media = (creatorMedia as Record<string, { image: string; gallery: string[] }>)[profile.id];
   if (media) Object.assign(profile, media, { suppliedMedia: true });
 }
+profiles.sort((a,b)=>Number(Boolean(b.suppliedMedia))-Number(Boolean(a.suppliedMedia)));
 export const editors:Profile[]=['Alex Turner','Sarah Wilson','Daniel Cooper','Zara Mehić','Kerem Aydın','Emily Wood'].map((name,i)=>({id:`editor-${i+1}`,name,age:25+i,role:'Editor',image:photo(portraits[(i+1)%8]),languages:i===3?['English','Bosnian']:i===4?['English','Turkish']:['English'],accent:'Not applicable',category:['UGC ads','TikTok / Reels','YouTube Shorts','Long-form YouTube','Podcast clips','UGC ads'][i],available:i!==2,whitelisting:false,skills:['Subtitles',i%2?'Motion graphics':'Color grading','Sound design'],gallery:Array.from({length:5},(_,j)=>photo(portraits[(i+j)%8])),turnaround:'3–5 business days'}));
