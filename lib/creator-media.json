@@ -1,0 +1,72 @@
+{
+  "creator-1": {
+    "image": "/images/creator-1/portrait.webp",
+    "gallery": [
+      "/images/creator-1/01.webp",
+      "/images/creator-1/02.webp",
+      "/images/creator-1/03.webp",
+      "/images/creator-1/04.webp",
+      "/images/creator-1/05.webp",
+      "/images/creator-1/06.webp",
+      "/images/creator-1/07.webp",
+      "/images/creator-1/08.webp",
+      "/images/creator-1/09.webp",
+      "/images/creator-1/10.webp"
+    ]
+  },
+  "creator-3": {
+    "image": "/images/creator-3/portrait.webp",
+    "gallery": [
+      "/images/creator-3/01.webp",
+      "/images/creator-3/02.webp",
+      "/images/creator-3/03.webp",
+      "/images/creator-3/04.webp",
+      "/images/creator-3/05.webp",
+      "/images/creator-3/06.webp",
+      "/images/creator-3/07.webp",
+      "/images/creator-3/08.webp",
+      "/images/creator-3/09.webp",
+      "/images/creator-3/10.webp"
+    ]
+  },
+  "creator-5": {
+    "image": "/images/creator-5/portrait.webp",
+    "gallery": [
+      "/images/creator-5/01.webp",
+      "/images/creator-5/02.webp",
+      "/images/creator-5/03.webp",
+      "/images/creator-5/04.webp",
+      "/images/creator-5/05.webp"
+    ]
+  },
+  "creator-7": {
+    "image": "/images/creator-7/portrait.webp",
+    "gallery": [
+      "/images/creator-7/01.webp",
+      "/images/creator-7/02.webp",
+      "/images/creator-7/03.webp",
+      "/images/creator-7/04.webp",
+      "/images/creator-7/05.webp",
+      "/images/creator-7/06.webp",
+      "/images/creator-7/07.webp",
+      "/images/creator-7/08.webp",
+      "/images/creator-7/09.webp",
+      "/images/creator-7/10.webp"
+    ]
+  },
+  "creator-9": {
+    "image": "/images/creator-9/portrait.webp",
+    "gallery": [
+      "/images/creator-9/01.webp",
+      "/images/creator-9/02.webp",
+      "/images/creator-9/03.webp",
+      "/images/creator-9/04.webp",
+      "/images/creator-9/05.webp",
+      "/images/creator-9/06.webp",
+      "/images/creator-9/07.webp",
+      "/images/creator-9/08.webp",
+      "/images/creator-9/09.webp",
+      "/images/creator-9/10.webp"
+    ]
+  }
+}
