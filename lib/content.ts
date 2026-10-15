@@ -8,5 +8,5 @@ export const faqs = [
  ['How long does a project take?', 'Timing depends on creator availability, product delivery, approvals and the number of deliverables. We agree a schedule before production; add your preferred deadline to your enquiry.'],
  ['Do you offer content with our employees?', 'Yes. Employee-generated content (EGC) is a separate service using your own team, with support for concepts, filming direction and editing.'],
  ['What happens after I send a brief?', 'Your enquiry reaches our team. We review the selected creators, service, budget and timing, then reply by email with questions or a proposal. Sending a brief does not create a booking or payment obligation.'],
- ['Are the public names used for bookings?', 'Profiles use portfolio names. The relevant booking details, availability and permissions are confirmed directly before an engagement. Photo portfolios show visual style; video deliverables are agreed in the brief.']
+ ['How should I read the profile details?', 'Profiles use portfolio names. Approximate ages and language listings are indicative profile information and are confirmed directly before an engagement, along with availability and permissions. Photo portfolios show visual style; video deliverables are agreed in the brief.']
 ] as const;
