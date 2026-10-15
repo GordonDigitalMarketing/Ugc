@@ -1,5 +1,9 @@
 User-Agent: *
 Allow: /
 Disallow: /contact.php
+Disallow: /analytics.php
+Disallow: /analytics-lib.php
+Disallow: /analytics-geo/
+Disallow: /studio-statistika.php
 
 Sitemap: https://ugc.ba/sitemap.xml
