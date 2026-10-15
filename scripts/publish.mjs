@@ -5,7 +5,7 @@ const run = (command, args) => {
 };
 const message = process.argv.slice(2).join(' ') || 'Update ugc.ba website';
 run('npm', ['run', 'build']);
-run('git', ['add', '--', 'app', 'lib', 'public', 'scripts', '.github', '.gitignore', 'next.config.ts', 'next-env.d.ts', 'package.json', 'package-lock.json', 'tsconfig.json', 'README.md', 'AGENTS.md']);
+run('git', ['add', '--', 'app', 'lib', 'public', 'scripts', '.github', '.gitignore', '.gitattributes', 'next.config.ts', 'next-env.d.ts', 'package.json', 'package-lock.json', 'tsconfig.json', 'README.md', 'AGENTS.md']);
 const changed = spawnSync('git', ['diff', '--cached', '--quiet']);
 if (changed.status === 1) run('git', ['commit', '-m', message]);
 else if (changed.status !== 0) process.exit(1);
