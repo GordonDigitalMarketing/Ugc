@@ -1,6 +1,6 @@
-:HL["/_next/static/chunks/11zrrdjeqisv3.css","style"]
+:HL["/_next/static/chunks/1fxfmyus_87b1.css","style"]
 :HL["/images/creator-115/portrait.webp","image"]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"slug","t":"d","k":"ana-kovac","s":[]},"h":65632,"c":"$Q3"}]]
 1:[["children",{"s":"creators","h":131168,"c":"$Q2"}]]
-0:{"b":"G0hwZo1h3HsjlH0MMjvsM","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"G57f3l6O2FlB8_zZjgQ3e","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
