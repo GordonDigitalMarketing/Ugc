@@ -37,7 +37,7 @@ jobs:
             git -C deployment init -b live
             git -C deployment remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
           fi
-          rsync -a --delete --exclude='.git' out/ deployment/
+          rsync -ac --delete --exclude='.git' out/ deployment/
           cd deployment
           git add -A
           git diff --cached --quiet && exit 0
