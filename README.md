@@ -1,45 +1,40 @@
-# FRAME — UGC talent directory
+# UGC.ba Studio
 
-Next.js / React / TypeScript starter for an agency-managed creator and editor directory.
+Next.js / React / TypeScript website with 20 owner-supplied creator photo portfolios, a browser-persisted shortlist, enquiry forms and a PHP mail endpoint on the existing cPanel hosting.
 
-## Run locally
+## Local preview
 
-```sh
 npm install
 npm run dev
-```
 
-Open http://127.0.0.1:3000. Production verification: `npm run build`. Type checking: `npm run typecheck`.
+Open http://127.0.0.1:3000. Contact forms in local preview submit to https://ugc.ba/contact.php; the live domain must resolve and have valid HTTPS. Next.js development does not execute PHP. No secrets are required in the frontend.
 
-## Publish GitHub + live
+## Publishing
 
-```sh
 npm run publish -- "Describe the change"
 npm run status
-```
 
-The publish command verifies the build, commits project files and pushes `main` to https://github.com/GordonDigitalMarketing/Ugc. GitHub Actions builds the static Next.js export and publishes it to the `live` branch. The existing ugc.ba cPanel account clones that branch at `/home/ugc/repositories/ugc-live`. A configured cron checks it every minute and copies built files into `/home/ugc/public_html` using rsync with delayed updates. No hosting passwords or tokens are stored in GitHub or source files. The CLI uses the existing local Git Credential Manager login.
+The CLI builds, commits project source and pushes main to https://github.com/GordonDigitalMarketing/Ugc. GitHub Actions checks PHP syntax, builds the static export and publishes built assets to the live branch. A cPanel cron pulls live every minute into /home/ugc/repositories/ugc-live and copies files to /home/ugc/public_html with checksums, delayed updates and public asset permissions. No hosting passwords are committed. DNS and nameservers are not modified. /version.json identifies the deployed source commit.
 
-The cPanel **Git Version Control → ugc.ba live → Pull or Deploy** screen also supports manual update and deployment through `.cpanel.yml`. Never edit the hosting clone manually; edit source on `main` instead. No DNS or nameserver changes are part of this workflow. DNS activation and a valid TLS certificate are required before the domain can be verified publicly. `/version.json` identifies the deployed source commit. GitHub build status: https://github.com/GordonDigitalMarketing/Ugc/actions.
+## Forms and delivery
 
-The first deployment is published on the existing hosting. Publication does not enable email delivery or administration; the inquiry form remains clearly marked as a demo.
+The homepage form, project brief and individual creator pages all POST JSON to public/contact.php. Recipients are fixed server-side: info@gordondm.com and info@ugc.ba. The server validates data, uses plain-text email, requires privacy acknowledgement, rejects a honeypot and limits a hashed network address to five submissions per hour. Temporary rate-limit records are kept outside public_html and old entries are removed after 24 hours on later requests. No message content is saved in a website database. The PHP mail return value confirms mail-server acceptance; cPanel Track Delivery is used to check recipient delivery.
 
-## Current functionality
+Enquiries do not create a booking or charge. A hidden companyFax field must stay empty. Failed submissions keep typed fields and show direct email links. Success is shown only after the server accepts the email.
 
-- 30 illustrative adult creator profiles and 6 editor profiles.
-- Search, role-specific category/service filters, language, age, accent, availability and whitelisting filters.
-- Accessible native profile dialogs, 5–6 illustrative gallery images and image navigation.
-- Browser-persisted shortlist and a project brief form that downloads JSON. No email is sent.
-- Responsive layout, package selection and FAQ.
+## Profiles and assets
 
-## Replacing portraits and portfolio media
+lib/profiles.ts holds stable ids, portfolio names, categories and slugs. lib/creator-media.json maps to neutral local WebP filenames in public/images. All 20 profiles use owner-supplied photos. Public names remain fictional portfolio names by request. Birth dates, original folder names, inferred ages and unsupported accents/availability are not published. Five original profiles are first, followed by 15 additional profiles. Photo sets have their actual available number of photos, without duplicate filler.
 
-Profile records are in `lib/profiles.ts`. Put approved images in `public/images/` and set a profile's `image` to `/images/filename.jpg`. Its `gallery` is an array of image URLs. For a specific override, add an assignment after profile creation, e.g. `profiles[0].image = '/images/olivia.jpg'`. You can ask Codex to perform this replacement by supplying the image and identifying the profile. No generation API or upload service is required for this file-based workflow.
+Original archives and temporary asset tools remain in ignored .local-assets and are not committed. Sharp exports strip original EXIF metadata. Fonts are self-hosted with their OFL licences in public/fonts. No stock portraits, external font requests, advertising pixels or analytics have been added.
 
-Five creator profiles use project-owner-supplied local photos mapped in lib/creator-media.json (45 gallery images plus 5 optimized portraits). Exported filenames are neutral and WebP assets omit original EXIF metadata. Original archive contents stay in ignored .local-assets/ and are not published. Names and all other demo details are unchanged. Other external images are illustrative stock portraits from Unsplash, repeated across some demo profiles and galleries. They do not identify the fictional names and are not real creator work. Remote images and Google Fonts require network access. Use approved local assets for launch. Actual video portfolios should be added as a dedicated typed media model with poster images and lazy-loaded video players; this starter does not present stock photographs as videos.
+## SEO and policy
 
-## Next phase
+Server-rendered content, descriptive metadata, canonical links, social preview PNG, favicon, robots.txt, sitemap and 20 static creator URLs support discovery. Homepage FAQ markup matches visible questions. The privacy page describes the implemented enquiry and browser-storage behavior; firm registration/address details are omitted at the owner's request. No search-ranking or legal-compliance guarantee is made.
 
-This is a deployed demonstration directory, not a marketplace. There is no database, administration interface, real inquiry delivery, sign-in or payment integration yet. Add a protected content-management interface and durable image storage when self-service editing is needed. The public app currently needs no secrets. Static export supports the present browser-based functionality; future server endpoints will require a different hosting configuration.
+## Checks
 
-English is the initial interface language. Creator spoken languages are separate structured fields; Bosnian/German interface translations and SEO landing pages remain future work. All rights, package terms and availability currently displayed are demo proposals, not live contractual offers.
+npm run build
+npm run typecheck
+
+GitHub Actions also runs php -l public/contact.php. Browser checks cover profile filtering, actual-image galleries, shortlist selection/removal and handoff to the enquiry form, responsive navigation and policy links.

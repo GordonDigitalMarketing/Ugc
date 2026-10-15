@@ -18,6 +18,8 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: Check contact form endpoint
+        run: php -l public/contact.php
       - run: npm run build
       - name: Prepare deployment metadata
         run: |

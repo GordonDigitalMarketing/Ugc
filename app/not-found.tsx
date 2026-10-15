@@ -1,0 +1,2 @@
+import Logo from './components/Logo';
+export default function NotFound(){return <><header><Logo/><a href="/">Home ↗</a></header><main className="section legal-page"><div className="eyebrow">A DIFFERENT FRAME</div><h1>This page has<br/>left the picture.</h1><p>The link may have changed. Explore the creator collective or get in touch and we’ll point you in the right direction.</p><a className="button dark" href="/#talent">Meet the creators ↗</a></main></>}

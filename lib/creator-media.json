@@ -68,5 +68,163 @@
       "/images/creator-9/09.webp",
       "/images/creator-9/10.webp"
     ]
+  },
+  "creator-101": {
+    "image": "/images/creator-101/portrait.webp",
+    "gallery": [
+      "/images/creator-101/01.webp",
+      "/images/creator-101/02.webp",
+      "/images/creator-101/03.webp",
+      "/images/creator-101/04.webp"
+    ]
+  },
+  "creator-102": {
+    "image": "/images/creator-102/portrait.webp",
+    "gallery": [
+      "/images/creator-102/01.webp",
+      "/images/creator-102/02.webp",
+      "/images/creator-102/03.webp",
+      "/images/creator-102/04.webp",
+      "/images/creator-102/05.webp"
+    ]
+  },
+  "creator-103": {
+    "image": "/images/creator-103/portrait.webp",
+    "gallery": [
+      "/images/creator-103/01.webp",
+      "/images/creator-103/02.webp",
+      "/images/creator-103/03.webp",
+      "/images/creator-103/04.webp"
+    ]
+  },
+  "creator-104": {
+    "image": "/images/creator-104/portrait.webp",
+    "gallery": [
+      "/images/creator-104/01.webp",
+      "/images/creator-104/02.webp",
+      "/images/creator-104/03.webp",
+      "/images/creator-104/04.webp",
+      "/images/creator-104/05.webp"
+    ]
+  },
+  "creator-105": {
+    "image": "/images/creator-105/portrait.webp",
+    "gallery": [
+      "/images/creator-105/01.webp",
+      "/images/creator-105/02.webp",
+      "/images/creator-105/03.webp",
+      "/images/creator-105/04.webp",
+      "/images/creator-105/05.webp",
+      "/images/creator-105/06.webp",
+      "/images/creator-105/07.webp",
+      "/images/creator-105/08.webp",
+      "/images/creator-105/09.webp",
+      "/images/creator-105/10.webp"
+    ]
+  },
+  "creator-106": {
+    "image": "/images/creator-106/portrait.webp",
+    "gallery": [
+      "/images/creator-106/01.webp",
+      "/images/creator-106/02.webp",
+      "/images/creator-106/03.webp",
+      "/images/creator-106/04.webp",
+      "/images/creator-106/05.webp"
+    ]
+  },
+  "creator-107": {
+    "image": "/images/creator-107/portrait.webp",
+    "gallery": [
+      "/images/creator-107/01.webp",
+      "/images/creator-107/02.webp",
+      "/images/creator-107/03.webp",
+      "/images/creator-107/04.webp",
+      "/images/creator-107/05.webp",
+      "/images/creator-107/06.webp",
+      "/images/creator-107/07.webp",
+      "/images/creator-107/08.webp",
+      "/images/creator-107/09.webp"
+    ]
+  },
+  "creator-108": {
+    "image": "/images/creator-108/portrait.webp",
+    "gallery": [
+      "/images/creator-108/01.webp",
+      "/images/creator-108/02.webp",
+      "/images/creator-108/03.webp",
+      "/images/creator-108/04.webp",
+      "/images/creator-108/05.webp"
+    ]
+  },
+  "creator-109": {
+    "image": "/images/creator-109/portrait.webp",
+    "gallery": [
+      "/images/creator-109/01.webp",
+      "/images/creator-109/02.webp",
+      "/images/creator-109/03.webp",
+      "/images/creator-109/04.webp",
+      "/images/creator-109/05.webp",
+      "/images/creator-109/06.webp"
+    ]
+  },
+  "creator-110": {
+    "image": "/images/creator-110/portrait.webp",
+    "gallery": [
+      "/images/creator-110/01.webp",
+      "/images/creator-110/02.webp",
+      "/images/creator-110/03.webp",
+      "/images/creator-110/04.webp",
+      "/images/creator-110/05.webp"
+    ]
+  },
+  "creator-111": {
+    "image": "/images/creator-111/portrait.webp",
+    "gallery": [
+      "/images/creator-111/01.webp",
+      "/images/creator-111/02.webp",
+      "/images/creator-111/03.webp",
+      "/images/creator-111/04.webp",
+      "/images/creator-111/05.webp"
+    ]
+  },
+  "creator-112": {
+    "image": "/images/creator-112/portrait.webp",
+    "gallery": [
+      "/images/creator-112/01.webp",
+      "/images/creator-112/02.webp",
+      "/images/creator-112/03.webp",
+      "/images/creator-112/04.webp"
+    ]
+  },
+  "creator-113": {
+    "image": "/images/creator-113/portrait.webp",
+    "gallery": [
+      "/images/creator-113/01.webp",
+      "/images/creator-113/02.webp",
+      "/images/creator-113/03.webp",
+      "/images/creator-113/04.webp"
+    ]
+  },
+  "creator-114": {
+    "image": "/images/creator-114/portrait.webp",
+    "gallery": [
+      "/images/creator-114/01.webp",
+      "/images/creator-114/02.webp",
+      "/images/creator-114/03.webp",
+      "/images/creator-114/04.webp",
+      "/images/creator-114/05.webp",
+      "/images/creator-114/06.webp",
+      "/images/creator-114/07.webp",
+      "/images/creator-114/08.webp"
+    ]
+  },
+  "creator-115": {
+    "image": "/images/creator-115/portrait.webp",
+    "gallery": [
+      "/images/creator-115/01.webp",
+      "/images/creator-115/02.webp",
+      "/images/creator-115/03.webp",
+      "/images/creator-115/04.webp"
+    ]
   }
 }

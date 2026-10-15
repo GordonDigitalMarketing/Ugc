@@ -1,0 +1,1 @@
+export default function Logo(){return <a href="/" className="brand" aria-label="UGC.ba Studio home"><span className="brand-symbol" aria-hidden="true"><i/><i/><i/><i/><b>u</b></span><span className="brand-word">ugc<span>.ba</span><small>CONTENT STUDIO</small></span></a>}

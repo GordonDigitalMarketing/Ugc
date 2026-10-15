@@ -1,15 +1,8 @@
-import creatorMedia from './creator-media.json';
-export type Profile={id:string;name:string;age:number;role:'Creator'|'Editor';image:string;languages:string[];accent:string;category:string;available:boolean;whitelisting:boolean;skills:string[];gallery:string[];turnaround:string;suppliedMedia?:boolean};
-const names=['Olivia Bennett','James Parker','Emma Collins','Noah Mitchell','Sophie Williams','Ethan Brooks','Charlotte Hayes','Lucas Reed','Amelia Foster','Oliver Grant','Isabella Moore','Henry Clarke','Mia Anderson','Leo Sullivan','Grace Walker','Jack Morgan','Lily Harrison','Theo Evans','Ella Thompson','Oscar Davis','Amna Hadžić','Tarik Begović','Lejla Delić','Adnan Kovač','Selin Yılmaz','Emir Demir','Defne Kaya','Deniz Arslan','Hannah Scott','Ben Carter'];
-const portraits=['photo-1534528741775-53994a69daeb','photo-1500648767791-00dcc994a43e','photo-1524504388940-b1c1722653e1','photo-1506794778202-cad84cf45f1d','photo-1524250502761-1ac6f2e30d43','photo-1517841905240-472988babdf9','photo-1531123897727-8f129e1688ce','photo-1506794778202-cad84cf45f1d'];
-export const photo=(id:string,w=700)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
-export const categories=['Lifestyle','Beauty','Fitness','Food','Tech','Fashion','SaaS','Sport'];
-export const languages=['English'];
-export const profiles:Profile[]=names.map((name,i)=>({id:`creator-${i+1}`,name,age:22+i%17,role:'Creator',image:photo(portraits[i%portraits.length]),languages:['English'],accent:i%2?'American English':'British English',category:i===6?'Sport':(i===4||i===16)?'SaaS':(i===8||i===14)?'Sport':categories[i%6],available:i%4!==3,whitelisting:i%3!==2,skills:i%2?['Raw footage','Additional hooks','Subtitles']:['Scriptwriting','Product photography','Monthly collaboration'],gallery:Array.from({length:6},(_,j)=>photo(portraits[(i+j)%portraits.length])),turnaround:'5–7 business days'}));
-for (const profile of profiles) {
-  const media = (creatorMedia as Record<string, { image: string; gallery: string[] }>)[profile.id];
-  if (media) Object.assign(profile, media, { suppliedMedia: true });
-}
-profiles.sort((a,b)=>Number(Boolean(b.suppliedMedia))-Number(Boolean(a.suppliedMedia)));
-export const editors:Profile[]=['Alex Turner','Sarah Wilson','Daniel Cooper','Zara Mehić','Kerem Aydın','Emily Wood'].map((name,i)=>({id:`editor-${i+1}`,name,age:25+i,role:'Editor',image:photo(portraits[(i+1)%8]),languages:['English'],accent:'Not applicable',category:['UGC ads','TikTok / Reels','YouTube Shorts','Long-form YouTube','Podcast clips','UGC ads'][i],available:i!==2,whitelisting:false,skills:['Subtitles',i%2?'Motion graphics':'Color grading','Sound design'],gallery:Array.from({length:5},(_,j)=>photo(portraits[(i+j)%8])),turnaround:'3–5 business days'}));
-
+import media from './creator-media.json';
+export type Profile = {id:string;slug:string;name:string;role:'Creator';image:string;languages:string[];category:string;gallery:string[]};
+const roster:[string,string,string][]=[
+ ['creator-1','Olivia Bennett','Lifestyle'],['creator-3','Emma Collins','Fitness'],['creator-5','Sophie Williams','SaaS'],['creator-7','Charlotte Hayes','Sport'],['creator-9','Amelia Foster','Fashion'],
+ ['creator-101','Ava Richardson','Lifestyle'],['creator-102','Chloe Spencer','Fashion'],['creator-103','Isla Kennedy','Fashion'],['creator-104','Ruby Lawson','Beauty'],['creator-105','Freya Hudson','Fitness'],['creator-106','Evie Fletcher','Fashion'],['creator-107','Alice Monroe','Beauty'],['creator-108','Maya Sterling','Lifestyle'],['creator-109','Zoe Whitmore','Fashion'],['creator-110','Nora Ellis','Beauty'],['creator-111','Clara West','Lifestyle'],['creator-112','Aria Blake','Lifestyle'],['creator-113','Hazel Quinn','Lifestyle'],['creator-114','Daisy Emerson','Fashion'],['creator-115','Mila Hart','Sport']
+];
+export const profiles:Profile[]=roster.map(([id,name,category])=>({id,slug:name.toLowerCase().replace(/ /g,'-'),name,category,role:'Creator',languages:['English'],...media[id as keyof typeof media]}));
+export const categories=['Lifestyle','Beauty','Fitness','Fashion','SaaS','Sport'];
