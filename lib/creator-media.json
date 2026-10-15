@@ -249,5 +249,13 @@
       "/images/creator-202/07.webp",
       "/images/creator-202/08.webp"
     ]
+  },
+  "creator-203": {
+    "image": "/images/creator-203/portrait.webp",
+    "gallery": [
+      "/images/creator-203/01.webp",
+      "/images/creator-203/02.webp",
+      "/images/creator-203/03.webp"
+    ]
   }
 }

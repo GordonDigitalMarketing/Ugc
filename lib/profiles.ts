@@ -51,6 +51,7 @@ profiles.push(
  {id:'creator-201',slug:'elise',name:'Elise',role:'Creator',category:'Lifestyle',focus:['SaaS','Lifestyle','Beauty'],languages:['English'],age:23,ageEstimated:true,...media['creator-201']},
  {id:'creator-202',slug:'mia',name:'Mia',role:'Creator',category:'Fashion',focus:['SaaS','Fashion','Beauty'],languages:['English'],age:24,ageEstimated:true,...media['creator-202']}
 );
+profiles.push({id:'creator-203',slug:'sonja',name:'Sonja',role:'Creator',category:'Fashion',focus:['Fashion','Beauty','SaaS'],languages:['English'],age:24,ageEstimated:false,...media['creator-203']});
 // Keep existing portfolio URLs working while displaying only first names everywhere.
 for(const profile of profiles){profile.name=profile.name.trim().split(/\s+/)[0];profile.languages=profile.languages.map(language=>language.replace(/\s*\([^)]*\)/g,''));}
 // Only adult profiles are listed; ages follow the latest supplied corrections.
@@ -60,7 +61,7 @@ if(featuredIndex>0)profiles.unshift(...profiles.splice(featuredIndex,1));
 const annaIndex=profiles.findIndex(profile=>profile.id==='creator-101');
 if(annaIndex>=0)profiles.push(...profiles.splice(annaIndex,1));
 const contentFocus:Record<string,string[]>={
- 'creator-1':['Lifestyle','Beauty','SaaS'],'creator-3':['Fitness','Sport'],'creator-5':['SaaS','Beauty'],'creator-7':['Sport','Lifestyle','Fashion'],'creator-9':['Fashion','Beauty'],'creator-101':['Lifestyle','SaaS','Fashion'],'creator-102':['Fashion','Lifestyle'],'creator-103':['Beauty','Fashion','SaaS'],'creator-104':['Beauty','Lifestyle'],'creator-105':['Fitness','Lifestyle','Sport'],'creator-106':['Fashion','Beauty','Lifestyle'],'creator-107':['Beauty','SaaS'],'creator-108':['Lifestyle','Fashion'],'creator-109':['Fashion','Beauty','SaaS'],'creator-110':['Beauty','Lifestyle'],'creator-111':['Lifestyle','Fashion','SaaS'],'creator-112':['SaaS','Lifestyle'],'creator-113':['Beauty','Lifestyle','Fashion'],'creator-114':['Fashion','Sport'],'creator-115':['Sport','Lifestyle'],'creator-201':['Lifestyle','Beauty'],'creator-202':['Fashion','Beauty','Lifestyle']
+ 'creator-1':['Lifestyle','Beauty','SaaS'],'creator-3':['Fitness','Sport'],'creator-5':['SaaS','Beauty'],'creator-7':['Sport','Lifestyle','Fashion'],'creator-9':['Fashion','Beauty'],'creator-101':['Lifestyle','SaaS','Fashion'],'creator-102':['Fashion','Lifestyle'],'creator-103':['Beauty','Fashion','SaaS'],'creator-104':['Beauty','Lifestyle'],'creator-105':['Fitness','Lifestyle','Sport'],'creator-106':['Fashion','Beauty','Lifestyle'],'creator-107':['Beauty','SaaS'],'creator-108':['Lifestyle','Fashion'],'creator-109':['Fashion','Beauty','SaaS'],'creator-110':['Beauty','Lifestyle'],'creator-111':['Lifestyle','Fashion','SaaS'],'creator-112':['SaaS','Lifestyle'],'creator-113':['Beauty','Lifestyle','Fashion'],'creator-114':['Fashion','Sport'],'creator-115':['Sport','Lifestyle'],'creator-201':['Lifestyle','Beauty'],'creator-202':['Fashion','Beauty','Lifestyle'],'creator-203':['Fashion','Beauty','SaaS']
 };
 for(const profile of profiles)profile.focus=[...new Set([...(contentFocus[profile.id]??[profile.category]),'SaaS'])];
 export function profileLabel(profile:Profile){return `${profile.name}${typeof profile.age==='number'?`, ${profile.age}`:''}`;}
