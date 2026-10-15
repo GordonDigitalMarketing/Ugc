@@ -62,6 +62,6 @@ if(annaIndex>=0)profiles.push(...profiles.splice(annaIndex,1));
 const contentFocus:Record<string,string[]>={
  'creator-1':['Lifestyle','Beauty','SaaS'],'creator-3':['Fitness','Sport'],'creator-5':['SaaS','Beauty'],'creator-7':['Sport','Lifestyle','Fashion'],'creator-9':['Fashion','Beauty'],'creator-101':['Lifestyle','SaaS','Fashion'],'creator-102':['Fashion','Lifestyle'],'creator-103':['Beauty','Fashion','SaaS'],'creator-104':['Beauty','Lifestyle'],'creator-105':['Fitness','Lifestyle','Sport'],'creator-106':['Fashion','Beauty','Lifestyle'],'creator-107':['Beauty','SaaS'],'creator-108':['Lifestyle','Fashion'],'creator-109':['Fashion','Beauty','SaaS'],'creator-110':['Beauty','Lifestyle'],'creator-111':['Lifestyle','Fashion','SaaS'],'creator-112':['SaaS','Lifestyle'],'creator-113':['Beauty','Lifestyle','Fashion'],'creator-114':['Fashion','Sport'],'creator-115':['Sport','Lifestyle'],'creator-201':['Lifestyle','Beauty'],'creator-202':['Fashion','Beauty','Lifestyle']
 };
-for(const profile of profiles)profile.focus=contentFocus[profile.id]??[profile.category];
+for(const profile of profiles)profile.focus=[...new Set([...(contentFocus[profile.id]??[profile.category]),'SaaS'])];
 export function profileLabel(profile:Profile){return `${profile.name}${typeof profile.age==='number'?`, ${profile.age}`:''}`;}
 export const categories=['Lifestyle','Beauty','Fitness','Fashion','SaaS','Sport'];
