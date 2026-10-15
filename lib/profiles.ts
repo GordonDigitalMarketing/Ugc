@@ -25,7 +25,7 @@ const details:Record<string,{name?:string;age:number;languages:string[];ageEstim
  'creator-112':{age:22,languages:['English']},
  'creator-113':{age:25,languages:['English']},
  'creator-114':{name:'Dunja Marković',age:22,languages:['English','Serbian']},
- 'creator-115':{name:'Ema Kovač',age:16,ageEstimated:false,languages:['English','Bosnian']}
+ 'creator-115':{name:'Ema Kovač',age:18,ageEstimated:false,languages:['English','Bosnian']}
 };
 for(const profile of profiles){const detail=details[profile.id];const originalSlug=profile.slug;Object.assign(profile,{ageEstimated:true},detail);profile.slug=profile.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ /g,'-');if(profile.slug!==originalSlug)profile.legacySlug=originalSlug;}
 
@@ -53,7 +53,9 @@ profiles.push(
 );
 // Keep existing portfolio URLs working while displaying only first names everywhere.
 for(const profile of profiles){profile.name=profile.name.trim().split(/\s+/)[0];profile.languages=profile.languages.map(language=>language.replace(/\s*\([^)]*\)/g,''));}
-// A known underage creator must not be presented as an adult booking profile.
+// Only adult profiles are listed; ages follow the latest supplied corrections.
 for(let index=profiles.length-1;index>=0;index--){if(typeof profiles[index].age==='number'&&profiles[index].age!<18)profiles.splice(index,1);}
+const featuredIndex=profiles.findIndex(profile=>profile.id==='creator-202');
+if(featuredIndex>0)profiles.unshift(...profiles.splice(featuredIndex,1));
 export function profileLabel(profile:Profile){return `${profile.name}${typeof profile.age==='number'?`, ${profile.age}`:''}`;}
 export const categories=['Lifestyle','Beauty','Fitness','Fashion','SaaS','Sport'];
