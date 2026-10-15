@@ -57,5 +57,7 @@ for(const profile of profiles){profile.name=profile.name.trim().split(/\s+/)[0];
 for(let index=profiles.length-1;index>=0;index--){if(typeof profiles[index].age==='number'&&profiles[index].age!<18)profiles.splice(index,1);}
 const featuredIndex=profiles.findIndex(profile=>profile.id==='creator-202');
 if(featuredIndex>0)profiles.unshift(...profiles.splice(featuredIndex,1));
+const annaIndex=profiles.findIndex(profile=>profile.id==='creator-101');
+if(annaIndex>=0)profiles.push(...profiles.splice(annaIndex,1));
 export function profileLabel(profile:Profile){return `${profile.name}${typeof profile.age==='number'?`, ${profile.age}`:''}`;}
 export const categories=['Lifestyle','Beauty','Fitness','Fashion','SaaS','Sport'];
