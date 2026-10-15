@@ -5,7 +5,7 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-$allowed = ['https://ugc.ba', 'https://www.ugc.ba', 'http://ugc.ba', 'http://127.0.0.1:3000', 'http://localhost:3000'];
+$allowed = ['https://ugc.ba', 'https://www.ugc.ba', 'http://ugc.ba', 'https://ugc.gordon.ba', 'http://ugc.gordon.ba', 'http://127.0.0.1:3000', 'http://localhost:3000'];
 if ($origin !== '' && !in_array($origin, $allowed, true)) { http_response_code(403); echo json_encode(['ok'=>false,'error'=>'This origin is not allowed.']); exit; }
 if ($origin !== '') { header('Access-Control-Allow-Origin: '.$origin); header('Vary: Origin'); }
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { header('Access-Control-Allow-Methods: POST'); header('Access-Control-Allow-Headers: Content-Type'); http_response_code(204); exit; }
@@ -38,7 +38,9 @@ $selection=[]; if(isset($data['shortlist']) && is_array($data['shortlist'])) for
 $lines=['New UGC.ba Studio enquiry','Name: '.$name,'Email: '.$email,'Brand: '.$brand,'Website: '.$website,'Service: '.$service,'Creators: '.($selection?implode(', ',$selection):'Please suggest a match')];
 foreach(['budget','videos','deadline','language','usage'] as $key)$lines[]=ucfirst($key).': '.field($data,$key,200);
 $lines[]="\nProject:\n".$description; $lines[]="\nPrivacy notice acknowledged. Submitted: ".gmdate('c');
-$headers=['From'=>'UGC.ba Studio <info@ugc.ba>','Reply-To'=>$email,'MIME-Version'=>'1.0','Content-Type'=>'text/plain; charset=UTF-8'];
-$accepted=@mail('info@gordondm.com, info@ugc.ba','New project enquiry | UGC.ba Studio',implode("\r\n",$lines),$headers,'-finfo@ugc.ba');
+$host=strtolower(explode(':',$_SERVER['HTTP_HOST']??'ugc.ba')[0]);
+$sender=$host==='ugc.gordon.ba'?'info@gordondm.com':'info@ugc.ba';
+$headers=['From'=>'UGC.ba Studio <'.$sender.'>','Reply-To'=>$email,'MIME-Version'=>'1.0','Content-Type'=>'text/plain; charset=UTF-8'];
+$accepted=@mail('info@gordondm.com, info@ugc.ba','New project enquiry | UGC.ba Studio',implode("\r\n",$lines),$headers,'-f'.$sender);
 if(!$accepted)respond(503,['ok'=>false,'error'=>'Mail could not be accepted. Please email info@ugc.ba directly.']);
 respond(200,['ok'=>true]);
