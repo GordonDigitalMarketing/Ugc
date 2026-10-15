@@ -50,3 +50,13 @@ An isolated mirror is configured on the existing gordondm cPanel account:
 - Canonicals remain on ugc.ba; the temporary host sends X-Robots-Tag: noindex, follow to avoid duplicate indexing.
 
 Future requests to publish GitHub + live should verify both mirrors' version.json. Never edit other WHM accounts, the gordon.ba document root, existing redirects or unrelated DNS records as part of UGC publication.
+
+## Private studio analytics
+
+- `/studio-statistika.php` is an authenticated dashboard, omitted from site navigation and marked noindex. The primary-domain URL redirects to the protected mirror dashboard.
+- Both sites send first-party events to `https://ugc.gordon.ba/analytics.php`. Visitor cookies and persistent browser identifiers are not used. Do Not Track and Global Privacy Control opt out of collection.
+- Event logs and the server-generated identity key are stored only in `/home/gordondm/.ugc-analytics`, outside every public document root, with restricted file permissions. This folder must be preserved across deployments.
+- Statistics include full IPs, approximate country, device/browser, entry sources, creator opens/clicks and active time. Returning visits are an estimate based on a monthly server-side identifier and a 30-minute session boundary. A routine collection cleanup removes files older than 30 days.
+- Country lookups use a local DB-IP Country Lite October 2026 binary database. The dashboard provides the required attribution; no visitor IP is sent to a geolocation provider. Update both network-order range files together when refreshing the dataset.
+- One account is configured. Its password verifier uses salted PBKDF2-SHA256 with 600,000 iterations. Dashboard sessions expire after two hours, with Secure/HttpOnly/SameSite cookies, CSRF protection and login rate limiting. No plaintext password is stored in source.
+- PHP syntax checks cover every public PHP endpoint before deployment. Test authentication, anonymous access denial, valid creator collection and optional contact fields after changes.

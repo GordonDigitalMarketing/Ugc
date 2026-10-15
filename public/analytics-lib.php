@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-if (count(get_included_files()) === 1) { http_response_code(404); exit; }
+if (realpath($_SERVER['SCRIPT_FILENAME']??'') === __FILE__) { http_response_code(404); exit; }
 function ugc_store(): string {
  $dir=dirname(__DIR__).'/.ugc-analytics';
  if(!is_dir($dir)&&!@mkdir($dir,0700,true)&&!is_dir($dir))throw new RuntimeException('Storage unavailable');
