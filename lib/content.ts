@@ -1,6 +1,6 @@
 export const faqs = [
  ['What is UGC and how can my brand use it?', 'User-generated content is content created in a personal, creator-led style. We help brands plan content for websites, social channels and advertising, with deliverables and usage agreed before production.'],
- ['How do I choose a creator?', 'Explore the photo portfolios, save the people you like to your shortlist and send one brief. We confirm the fit, availability and scope with you before you book.'],
+ ['How do I choose a creator?', 'Explore the photo portfolios, choose creators for your video package and send one brief. We confirm the fit, availability and scope with you before you book.'],
  ['Do creators publish on their own accounts?', 'Content creation and posting are separate services. Tell us if you also need creator-account publishing so it can be included in the proposal.'],
  ['Can I use the content in paid ads or partnership ads?', 'Paid advertising, whitelisting and partnership ads require an agreed licence. We confirm the platform, duration, account access and fees before the campaign starts.'],
  ['Can you edit footage we already have?', 'Yes. Request editing-only support for short-form ads, Reels, TikTok, YouTube or podcast clips. Share your footage format and the outputs you need in your brief.'],
