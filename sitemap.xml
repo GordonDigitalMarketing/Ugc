@@ -121,6 +121,11 @@
 <priority>0.7</priority>
 </url>
 <url>
+<loc>https://ugc.ba/creators/lana/</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
 <loc>https://ugc.ba/creators/anna-wilson/</loc>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
